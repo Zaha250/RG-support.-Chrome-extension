@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "RG Support",
+  "version": "1.0",
+  "description": "Выбор шаблона для ответа на часто задаваемые вопросы",
+  "permissions": ["scripting", "activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
