@@ -1,0 +1,19 @@
+{
+  "name": "rg-support-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "popup.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zaha250/RG-support.-Chrome-extension.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zaha250/RG-support.-Chrome-extension/issues"
+  },
+  "homepage": "https://github.com/Zaha250/RG-support.-Chrome-extension#readme"
+}
