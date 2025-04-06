@@ -1,7 +1,7 @@
 import templatesDB from '../../db/templates.json' with { type: "json" };
-import {copyToClipboard} from "./utils/copyToClipboard.js";
+import {copyTemplate, getTemplateById, insertTemplate} from "./utils/tempateOperation.js";
 
-function renderTemplate(template) {
+function renderTemplateItem(template) {
     return `
         <li class="list-templates__item template" data-templateId="${template.id}">
             <div class="template__content">
@@ -27,16 +27,33 @@ export function renderTemplateList(container) {
     }
 
     for(const template of templatesDB) {
-        containerEl.innerHTML += renderTemplate(template);
+        containerEl.innerHTML += renderTemplateItem(template);
     }
 
     const templatesList = document.querySelectorAll('.list-templates__item');
 
     Array.from(templatesList).forEach(templateNode => {
-        templateNode.querySelector('.template__copy').addEventListener('click', () => {
-            const textContent = templateNode.querySelector('.template__content').textContent.trim();
+        const templateId = templateNode.getAttribute('data-templateId');
 
-            copyToClipboard(textContent);
-        })
+        /* Copy */
+        templateNode.querySelector('.template__copy').addEventListener('click', () => {
+            const selectedTemplate = getTemplateById(Number(templateId));
+            const content = selectedTemplate.content;
+            copyTemplate(content);
+        });
+
+        /* Insert */
+        templateNode.querySelector('.template__paste').addEventListener('click', async () => {
+            const selectedTemplate = getTemplateById(Number(templateId));
+            const content = selectedTemplate.content;
+
+            const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+            chrome.scripting.executeScript({
+                target: { tabId: tab.id },
+                function: insertTemplate,
+                args: [content]
+            });
+        });
     });
 }
