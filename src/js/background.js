@@ -9,7 +9,7 @@ chrome.runtime.onInstalled.addListener(() => {
 // Создание вкладки с переходом по собранному URL
 function openUserProfileTab(domain, query) {
     const url = `https://${domain}.rozentalgroup.ru/demo/dispetcher/users/?q=${encodeURIComponent(query)}`;
-    chrome.tabs.create({ url });
+    chrome.tabs.create({ url, active: false });
 }
 
 // Извлекаем sender и домен внутри страницы
