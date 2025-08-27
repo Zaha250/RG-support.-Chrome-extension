@@ -7,17 +7,23 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 // Создание вкладки с переходом по собранному URL
-function openUserProfileTab(domain, query) {
-    const url = `https://${domain}.rozentalgroup.ru/demo/dispetcher/users/?q=${encodeURIComponent(query)}`;
+function openUserProfileTab(hostname, query) {
+    const url = `https://${hostname}/demo/dispetcher/users/?q=${encodeURIComponent(query)}`;
     chrome.tabs.create({ url, active: false });
 }
 
-// Извлекаем sender и домен внутри страницы
+// Находим кнопку "отписаться" и извлекаем URL клиента
 function extractSenderAndDomain(selectedText) {
-    const contactEl = document.querySelector('.letter-contact');
-    const sender = contactEl?.getAttribute('title');
-    const [domain] = sender ? sender.split('@') : [''];
-    return { sender, domain, selectedText };
+    const links = document.querySelectorAll('.letter-body__body-content a');
+    const targetLink = Array.from(links).find(a =>
+        a.textContent.toLowerCase().includes('отписаться')
+    );
+
+    const url = targetLink?.href;
+    const urlObj = new URL(url);
+    const hostname = urlObj.hostname;
+
+    return { hostname, selectedText, targetLink };
 }
 
 // Обработчик клика по контекстному меню
@@ -36,8 +42,9 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         func: extractSenderAndDomain,
     }, (results) => {
         const result = results?.[0]?.result;
-        if (result?.domain && result?.selectedText) {
-            openUserProfileTab(result.domain, result.selectedText);
+        console.log({result})
+        if (result?.hostname && result?.selectedText) {
+            openUserProfileTab(result.hostname, result.selectedText);
         } else {
             console.warn('Не удалось извлечь sender или domain с текущей страницы');
         }
