@@ -3,18 +3,39 @@
   "name": "RG Support",
   "version": "1.0",
   "description": "Выбор шаблона для ответа на часто задаваемые вопросы",
-  "permissions": ["scripting", "activeTab", "contextMenus"],
-  "host_permissions": ["<all_urls>"],
+  "permissions": [
+    "scripting",
+    "activeTab",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "action": {
     "default_popup": "popup.html"
   },
   "web_accessible_resources": [
     {
-      "resources": ["src/js/popup.js", "src/js/renderTemplates.js", "src/css/index.css"],
-      "matches": ["<all_urls>"]
+      "resources": [
+        "src/js/popup.js",
+        "src/js/renderTemplates.js",
+        "src/css/index.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
     }
   ],
   "background": {
     "service_worker": "./src/js/background.js"
+  },
+  "commands": {
+    "toggle_user_search": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Поиск выбранного пользователя"
+    }
   }
 }
