@@ -11,7 +11,19 @@
 </head>
 <body>
     <div class="root">
-        <ul class="list-templates">
+        <div class="template-search">
+            <label class="template-search__label" for="template-search">Поиск по шаблонам</label>
+            <input
+                class="template-search__input"
+                id="template-search"
+                type="search"
+                placeholder="Введите текст шаблона"
+                autocomplete="off"
+                aria-controls="templates-list"
+            >
+        </div>
+        <p class="templates-empty" role="status" hidden>Шаблоны не найдены.</p>
+        <ul class="list-templates" id="templates-list">
 
         </ul>
     </div>

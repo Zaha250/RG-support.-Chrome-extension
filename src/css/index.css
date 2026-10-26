@@ -30,6 +30,43 @@ button{
     gap: 12px;
 }
 
+.template-search{
+    position: sticky;
+    top: 0;
+    padding-bottom: 16px;
+    background: #fff;
+}
+
+.template-search__label{
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.template-search__input{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #E3E3E3;
+    border-radius: 6px;
+    font: inherit;
+}
+
+.template-search__input:focus-visible{
+    outline: 2px solid #447BBA;
+    outline-offset: 2px;
+}
+
+.templates-empty{
+    padding: 12px 16px;
+    color: #666;
+    font-size: 14px;
+}
+
+.list-templates__item[hidden]{
+    display: none;
+}
+
 .list-templates__item {
     display: flex;
     justify-content: space-between;
