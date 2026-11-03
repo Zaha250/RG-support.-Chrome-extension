@@ -89,8 +89,29 @@ button{
     display: flex;
     gap: 10px;
     flex-wrap: nowrap;
+    flex-shrink: 0;
 }
 
 .template-buttons__item{
     color: #447BBA;
+}
+
+.template-buttons__item:focus-visible{
+    outline: 2px solid #447BBA;
+    outline-offset: 3px;
+}
+
+.template-buttons__item:disabled{
+    opacity: 0.5;
+    cursor: wait;
+}
+
+.template-action-status{
+    margin-top: 10px;
+    font-size: 14px;
+    color: #276438;
+}
+
+.template-action-status[data-error="true"]{
+    color: #a12622;
 }
